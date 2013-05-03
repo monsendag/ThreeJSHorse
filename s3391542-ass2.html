@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+    <title>INTE2033 Web3D and Graphics Technologies - Assignment 2</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="header">
+    <h2>INTE2033 Web3D and Graphics Technologies</h2>
+
+    <h3>Assignment 2</h3>
+    Dag Einar Monsen <<a href="s3391542@student.rmit.edu.au">s3391542@student.rmit.edu.au</a>>
+</div>
+</body>
+<script src="js/lib/three.js"></script>
+<script src="js/lib/Three.TrackballControls.js"></script>
+<script src="js/lib/require.js"></script>
+<script>
+    require.config({
+        baseUrl: 'js',
+        paths: {
+            'mousetrap': 'lib/mousetrap.min',
+            'underscore': 'lib/underscore-min',
+            'asevented': 'lib/asevented.min'
+        }
+    });
+    require(['Scene'], function(Scene) {
+        window.scene = new Scene();
+    })
+</script>
+<script type="x-shader/x-vertex" id="vertexShader">
+    varying vec3 vWorldPosition;
+
+    void main() {
+    vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+    vWorldPosition = worldPosition.xyz;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+    }
+</script>
+<script type="x-shader/x-fragment" id="fragmentShader">
+    uniform vec3 topColor;
+    uniform vec3 bottomColor;
+    uniform float offset;
+    uniform float exponent;
+    varying vec3 vWorldPosition;
+    void main() {
+    float h = normalize( vWorldPosition + offset ).y;
+    gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( h, exponent ), 0.0 ) ), 1.0 );
+    }
+</script>
