@@ -1,0 +1,31 @@
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+h2,h3 {
+    margin:0;
+    bottom:0;
+}
+h3 {
+    display:inline;
+}
+
+.header span {
+  font-size: 0.9em;
+}
+
+.header {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    z-index: 1;
+    margin: 0;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
