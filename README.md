@@ -1,1 +1,1 @@
-Animated Horse based on [mrdoob][three.js].
+Animated Horse based on mrdoob/three.js.
